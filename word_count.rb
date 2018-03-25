@@ -5,7 +5,15 @@ class Phrase
     end   
     
     def word_count()
-        @return_value = @input_string.length
-        return @return_value
+        @wordCount = {}
+        @stringArray = @input_string.split(" ")
+        @stringArray.each do | word |
+            if @wordCount.has_key?(word)
+                @wordCount[word] = @wordCount[word] + 1
+            else
+                @wordCount[word] = 1
+            end
+        end
+        return @wordCount
     end
 end 
