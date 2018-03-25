@@ -7,7 +7,8 @@ class Phrase
     def word_count()
         word_count = {}
         lower_case = @input_string.downcase
-        punctuation_removed = lower_case.gsub(/\p{^Alnum}/, ' ')
+        apostrophies_removed = lower_case.gsub(/[']/, '')
+        punctuation_removed = apostrophies_removed.gsub(/\p{^Alnum}/, ' ')
         stringArray = punctuation_removed.split(" ")
         stringArray.each do | word |
             if word_count.has_key?(word)
@@ -16,21 +17,19 @@ class Phrase
                 word_count[word] = 1
             end
         end
-    #   I realise I should replace all ' with a blank space first, then do a gsub for other characters rather than this
-        word_count.delete("t")
-        if word_count.include?("don")
-            word_count["don't"] = word_count.delete("don")
-            return word_count
-        elsif 
-            word_count.include?("can")
-            word_count["can't"] = word_count.delete("can")
-        else
-            
-        end
+        return_value = aposhtrophie_adder (word_count)
          return word_count
     end
 
+    def aposhtrophie_adder (input)
+            if input.include?("dont")
+                input["don't"] = input.delete("dont")
+            elsif 
+                input.include?("cant")
+                input["can't"] = input.delete("cant")
+            else 
+            end
+        return input
+    end
+
 end 
-
-
-# 
